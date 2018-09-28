@@ -1,10 +1,10 @@
 # Flutter Calculator
 
-A Flutter iOS Calculator.
+A Replica of iPhone’s system calculator in Flutter.
 <div align="center">
   <img src="https://raw.githubusercontent.com/sayonetech/flutter_calculator/master/screenshots/iphone.png" height="540"/>
   <img src="https://raw.githubusercontent.com/sayonetech/flutter_calculator/master/screenshots/pixel.png" height="540"/>
-  
+ 
 <div/>
 
 ### Getting Started
