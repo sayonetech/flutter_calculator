@@ -8,7 +8,7 @@ A Replica of iPhone’s system calculator in Flutter.
 <div/>
 
 ### Getting Started
-1. [Install Flutter](https://flutter.io/setup/)
+##1. [Install Flutter](https://flutter.io/setup/)
 2. Clone this repo
 3. Run `flutter run --release` on your terminal
 
