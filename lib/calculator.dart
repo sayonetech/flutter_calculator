@@ -244,7 +244,7 @@ class _HomePageState extends State<HomePage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  ZeroButton(onPressed: (){_returnZeroButton();},),
+                  ZeroButton(onPressed: (){_zeroButtonAction();},),
                   BinaryOperatorButton(
                     text: ".",
                     onPressed: () {
@@ -266,175 +266,6 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _returnButtonWithText(
-      String text, Color color, Color bgColor, Operation operation) {
-    return Padding(
-      padding: const EdgeInsets.all(5.0),
-      child: RawMaterialButton(
-        shape: const CircleBorder(),
-        constraints: BoxConstraints.tight(Size(60.0, 60.0)),
-        onPressed: () {
-          if (isNumeric(text)) {
-            // If the button  pressed is a number.
-            if (result != null) initialiseValues();
-            if (isOperand1Completed) {
-              if (operand2 == null) {
-                operand2 = text;
-              } else {
-                if (operand2.toString().length < 9) operand2 += text;
-              }
-            } else {
-              if (operand1 == null) {
-                operand1 = text;
-              } else {
-                if (operand1.toString().length < 9) operand1 += text;
-              }
-            }
-          } else {
-            // If the button pressed is an operator.
-            switch (operation) {
-              case Operation.add:
-                if (operand2 != null) {
-                  if (result == null) _findOutput();
-                  operand1 = result;
-                  operand2 = null;
-                  result = null;
-                }
-                operator = add_sign;
-                isOperand1Completed = true;
-                break;
-              case Operation.subtract:
-                if (operand2 != null) {
-                  if (result == null) _findOutput();
-                  operand1 = result;
-                  operand2 = null;
-                  result = null;
-                }
-                operator = minus_sign;
-                isOperand1Completed = true;
-                break;
-              case Operation.multiply:
-                if (operand2 != null) {
-                  if (result == null) _findOutput();
-                  operand1 = result;
-                  operand2 = null;
-                  result = null;
-                }
-                operator = multiply_sign;
-                isOperand1Completed = true;
-                break;
-              case Operation.divide:
-                if (operand2 != null) {
-                  if (result == null) _findOutput();
-                  operand1 = result;
-                  operand2 = null;
-                  result = null;
-                }
-                operator = divide_sign;
-                isOperand1Completed = true;
-                break;
-              case Operation.percent:
-                if (result != null)
-                  result = result / 100;
-                else if (isOperand1Completed) {
-                  if (operand2 != null) {
-                    operand2 = (double.parse(operand2) / 100).toString();
-                  }
-                } else {
-                  if (operand1 != null) {
-                    operand1 = (double.parse(operand1) / 100).toString();
-                  }
-                }
-                break;
-              case Operation.clear:
-                initialiseValues();
-                break;
-              case Operation.changeSign:
-                if (result != null)
-                  result = -result;
-                else if (isOperand1Completed) {
-                  if (operand2 != null) {
-                    operand2 = (-int.parse(operand2)).toString();
-                  }
-                } else {
-                  if (operand1 != null) {
-                    operand1 = (-int.parse(operand1)).toString();
-                  }
-                }
-                break;
-              case Operation.addDecimal:
-                if (result != null) initialiseValues();
-                if (isOperand1Completed) {
-                  if (!operand2.toString().contains(".")) {
-                    if (operand2 == null) {
-                      operand2 = ".";
-                    } else {
-                      operand2 += ".";
-                    }
-                  }
-                } else {
-                  if (!operand1.toString().contains(".")) {
-                    if (operand1 == null) {
-                      operand1 = ".";
-                    } else {
-                      operand1 += ".";
-                    }
-                  }
-                }
-                break;
-              case Operation.equals:
-                if (result == null) _findOutput();
-
-                break;
-              case Operation.none:
-            }
-          }
-          setState(() {});
-        },
-        child: Text(
-          text,
-          style: TextStyle(color: color, fontSize: 20.0),
-        ),
-        fillColor: bgColor,
-      ),
-    );
-  }
-
-  Widget _returnZeroButton() {
-    return Padding(
-      padding: const EdgeInsets.all(5.0),
-      child: Container(
-        height: 60.0,
-        width: MediaQuery.of(context).size.width / 2.5,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(25.0),
-            color: Color.fromRGBO(56, 54, 56, 1.0)),
-        child: MaterialButton(
-          onPressed: () {
-            if (result != null) initialiseValues();
-            if (isOperand1Completed) {
-              if (operand2 == null || operand1 == "0")
-                operand2 = "0";
-              else {
-                if (operand2.toString().length < 9) operand2 += "0";
-              }
-            } else {
-              if (operand1 == null || operand1 == "0") {
-                operand1 = "0";
-              } else {
-                if (operand1.toString().length < 9) operand1 += "0";
-              }
-            }
-            setState(() {});
-          },
-          child: Text(
-            "0",
-            style: TextStyle(color: Colors.white, fontSize: 20.0),
-          ),
-        ),
-      ),
-    );
-  }
 
   void initialiseValues() {
     operand1 = null;
@@ -506,6 +337,7 @@ class _HomePageState extends State<HomePage> {
     }
     setState(() {});
   }
+
  void _binaryOperationAction(BinaryOperation operation) {
     switch (operation) {
       case BinaryOperation.add:
@@ -615,12 +447,5 @@ class _HomePageState extends State<HomePage> {
         break;
     }
     setState(() {});
-  }
-
-  bool isNumeric(String s) {
-    if (s == null) {
-      return false;
-    }
-    return double.parse(s, (e) => null) != null;
   }
 }
