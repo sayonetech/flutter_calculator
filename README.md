@@ -5,10 +5,10 @@ A Replica of iPhone’s system calculator in Flutter.
   <img src="https://raw.githubusercontent.com/sayonetech/flutter_calculator/master/screenshots/iphone.png" height="540"/>
   <img src="https://raw.githubusercontent.com/sayonetech/flutter_calculator/master/screenshots/pixel.png" height="540"/>
  
-<div/>
+</div>
 
 ### Getting Started
-##1. [Install Flutter](https://flutter.io/setup/)
+1. [Install Flutter](https://flutter.io/setup/)
 2. Clone this repo
 3. Run `flutter run --release` on your terminal
 
